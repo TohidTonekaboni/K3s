@@ -12,6 +12,10 @@ k3s is designed for Linux, so on macOS it typically runs inside a VM/container
 your setup before starting:
 
 ```bash
+k3d cluster create testcluster --servers 1 --agents 1
+kubectl get nodes
+k3d cluster stop testcluster
+
 kubectl get nodes -o wide
 kubectl cluster-info
 kubectl get pods -A
