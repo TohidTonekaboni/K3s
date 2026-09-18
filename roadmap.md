@@ -12,7 +12,7 @@ k3s is designed for Linux, so on macOS it typically runs inside a VM/container
 your setup before starting:
 
 ```bash
-k3d cluster create testcluster --servers 1 --agents 1
+k3d cluster create testcluster --servers 1 --agents 1 -p "80:80@loadbalancer" -p "443:443@loadbalancer"
 kubectl get nodes
 k3d cluster stop testcluster
 
@@ -20,6 +20,12 @@ kubectl get nodes -o wide
 kubectl cluster-info
 kubectl get pods -A
 ```
+
+The `-p "80:80@loadbalancer" -p "443:443@loadbalancer"` flags map host ports
+80/443 to the cluster's Traefik ingress (via the k3d serverlb container).
+Without them, `curl http://localhost/...` can't reach ingress at all —
+the ingress `ADDRESS` shown by `kubectl get ingress` is only the container's
+internal Docker network IP, not reachable directly from macOS.
 
 If `kubectl` isn't pointed at your k3s cluster yet, find the kubeconfig
 (often `/etc/rancher/k3s/k3s.yaml` on the node, or exported by k3d/multipass)

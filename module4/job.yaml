@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: one-off-task
+spec:
+  template:
+    spec:
+      containers:
+        - name: task
+          image: busybox
+          command: ["sh", "-c", "echo doing work; sleep 5; echo done"]
+      restartPolicy: Never
+  backoffLimit: 2

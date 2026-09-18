@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pinned-pod
+spec:
+  nodeSelector:
+    disktype: fast
+  containers:
+    - name: pinned
+      image: busybox
+      command: ["sleep", "3600"]
