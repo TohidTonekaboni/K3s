@@ -1,0 +1,7 @@
+image:
+  repository: hashicorp/http-echo
+  tag: latest
+
+replicaCount: 1
+
+text: "hello from helm"
