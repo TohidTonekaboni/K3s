@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crashy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crashy
+  template:
+    metadata:
+      labels:
+        app: crashy
+    spec:
+      containers:
+        - name: crashy
+          image: busybox
+          command: ["sh", "-c", "echo booting; sleep 2; echo crashing now; exit 1"]
