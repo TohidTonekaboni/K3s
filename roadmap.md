@@ -211,5 +211,6 @@ Check off modules as you complete them:
 - [ ] Module 5 — Observability & Debugging
 - [ ] Module 6 — Packaging & GitOps-lite
 - [ ] Module 7 — Cluster Operations
+- [ ] Capstone Project — CI/CD + GitOps (see Capstone_Project/capstone-roadmap.md)
 </content>
 </invoke>

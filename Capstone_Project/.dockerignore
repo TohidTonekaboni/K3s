@@ -1,0 +1,5 @@
+app/tests
+app/pytest.ini
+app/__pycache__
+**/__pycache__
+*.pyc
