@@ -13,9 +13,6 @@ on:
       - "Capstone_Project/Dockerfile"
       - ".github/workflows/capstone-ci.yml"
 
-env:
-  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/k3s-capstone-app
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -53,11 +50,17 @@ jobs:
 
       - uses: docker/setup-buildx-action@v3
 
+      - name: Compute lowercase image name
+        id: image
+        run: echo "name=ghcr.io/${OWNER,,}/k3s-capstone-app" >> "$GITHUB_OUTPUT"
+        env:
+          OWNER: ${{ github.repository_owner }}
+
       - name: Build and push image
         uses: docker/build-push-action@v6
         with:
           context: Capstone_Project
           push: true
           tags: |
-            ${{ env.IMAGE_NAME }}:${{ github.sha }}
-            ${{ env.IMAGE_NAME }}:latest
+            ${{ steps.image.outputs.name }}:${{ github.sha }}
+            ${{ steps.image.outputs.name }}:latest
